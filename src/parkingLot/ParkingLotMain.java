@@ -2,19 +2,15 @@ package parkingLot;
 
 
 
-class ParkingMain extends ParkingAction
-{
-	
-	
-}
 
-public class ParkingLotMain {
+
+public class ParkingLotMain extends ParkingAction {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("ParkingLot");
-		ParkingMain main=new ParkingMain();
+		ParkingLotMain main=new ParkingLotMain();
 		if(args!=null && args.length!=0)
 		{
 			main.takeinputs(args);
@@ -32,6 +28,7 @@ public class ParkingLotMain {
 			main.createSlots();
 			main.leaveslot();
 			main.status();
+			//method for check
 			main.slotfullornot();
 			main.checkallocatedslot();
 			main.new_carchecking();
