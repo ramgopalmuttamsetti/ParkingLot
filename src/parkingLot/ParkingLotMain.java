@@ -13,7 +13,7 @@ public class ParkingLotMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		
+		System.out.println("ParkingLot");
 		ParkingMain main=new ParkingMain();
 		if(args!=null && args.length!=0)
 		{
