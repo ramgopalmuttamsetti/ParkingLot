@@ -85,8 +85,8 @@ public class ParkingAction implements ParkingLotMethods{
 		     if(input!=null && !input.isEmpty())
 		     {
 		    	 slot_number =input.replaceFirst(".*?(\\d+).*", "$1");	
-				 System.out.println("Created a parking lot with "+slot_number+" slots");
-				 System.out.println("Enter car details");
+				 System.out.println("Created a parking lot with "+slot_number+" slots"+"\n");
+				
 				 
 				 new_cardata.clear();
 				 original_new_cardata.clear();
@@ -132,13 +132,19 @@ public class ParkingAction implements ParkingLotMethods{
 			    {
 				
 					
-			    	if(file_data.get(i).contains("leave"))
+			    	if(file_data.get(i).contains("leave") || file_data.get(i).contains("LEAVE") || file_data.get(i).contains("Leave"))
 			    	{
 			    		 leave_slot = file_data.get(i).replaceFirst(".*?(\\d+).*", "$1");
 			    		 
-			    		 new_cardata.remove(Integer.parseInt(leave_slot));
-			    		
-			    		System.out.println("Slot number " +leave_slot +" is free\n");
+			    		 if(Integer.parseInt(leave_slot)<new_cardata.size())
+			    		 {
+			    			 new_cardata.remove(Integer.parseInt(leave_slot));
+					    	 System.out.println("Slot number " +leave_slot +" is free\n");
+			    		 }
+			    		 else
+			    		 {
+			    			 System.out.println("These slot are not present\n");
+			    		 }
 			    	}
 			    }
 				
@@ -146,7 +152,7 @@ public class ParkingAction implements ParkingLotMethods{
 		
 		else
 		{
-			System.out.println("Leave slot");
+			
 			leave_slot =sc.nextLine().replaceFirst(".*?(\\d+).*", "$1");
 			
 			if(leave_slot!=null && !leave_slot.isEmpty())
@@ -155,8 +161,16 @@ public class ParkingAction implements ParkingLotMethods{
 				{
 					if (i == Integer.parseInt(leave_slot))
 					{
-						new_cardata.remove(i);
-						System.out.println("Slot number " +leave_slot +" is free\n");
+						if(Integer.parseInt(leave_slot)<new_cardata.size())
+						{
+							new_cardata.remove(i);
+							System.out.println("Slot number " +leave_slot +" is free\n");
+						}
+						else
+						{
+							System.out.println("These slot are not present\n");
+						}
+						
 					}
 				}
 			}
@@ -196,7 +210,7 @@ public class ParkingAction implements ParkingLotMethods{
 		else
 		{
 			
-			System.out.println("status");
+			
 			convert_word_status = sc.nextLine();
 			if(convert_word_status!=null && !convert_word_status.isEmpty())
     		{
@@ -218,7 +232,7 @@ public class ParkingAction implements ParkingLotMethods{
 	}
 
 	
-
+   //checking the slots are full
 	@Override
 	public void checkallocatedslot() {
 		// TODO Auto-generated method stub
@@ -237,7 +251,7 @@ public class ParkingAction implements ParkingLotMethods{
 						for(int j=0;j<empty_slots.size();j++)
 						{
 							new_cardata.add(Integer.parseInt(empty_slots.get(j)), file_data.get(i));
-							System.out.println("Allocated slot number "+empty_slots.get(j));
+							System.out.println("Allocated slot number "+empty_slots.get(j)+"\n");
 							empty_slots.remove(j);
 						}
 					}
@@ -260,7 +274,8 @@ public class ParkingAction implements ParkingLotMethods{
 				   for(int j=0;j<empty_slots.size();j++)
 					{
 					   new_cardata.add(Integer.parseInt(empty_slots.get(j)), check_car_number);
-					    System.out.println("Allocated slot number "+empty_slots.get(j));
+					  
+					    System.out.println("Allocated slot number "+empty_slots.get(j)+"\n");
 						empty_slots.remove(j);
 					 }
 				}
@@ -282,7 +297,8 @@ public class ParkingAction implements ParkingLotMethods{
 			if(new_cardata.size()-1==Integer.parseInt(file_slot_number))
 			{
 				
-				System.out.println("Sorry, parking lot is full");
+				System.out.println("Sorry, parking lot is full \n");
+				
 			}
 			else
 			{
@@ -326,7 +342,8 @@ public class ParkingAction implements ParkingLotMethods{
 			
 		}
 	}
-
+ 
+	//color car number
 	@Override
 	public void commoncolorcarsnumbers() {
 		// TODO Auto-generated method stub
@@ -337,7 +354,7 @@ public class ParkingAction implements ParkingLotMethods{
 			{
 				if(file_data.get(i).contains("registration_numbers_for_cars_with_colour"))
 				{
-					System.out.println(file_data.get(i));
+				
 					String color [] =file_data.get(i).split(" ");
 					StringBuilder sb =new StringBuilder();
 					
@@ -350,8 +367,8 @@ public class ParkingAction implements ParkingLotMethods{
 							
 						}
 					}
-				System.out.println("\n");
-				System.out.println(sb.toString().substring(0, sb.toString().length()-1));
+				
+				System.out.println(sb.toString().substring(0, sb.toString().length()-1)+"\n");
 				sb = null;
 				}
 			}
@@ -375,7 +392,7 @@ public class ParkingAction implements ParkingLotMethods{
     				}
     			}
             	System.out.println("\n");
-    			System.out.println(sb.toString().substring(0, sb.toString().length()-1));
+    			System.out.println(sb.toString().substring(0, sb.toString().length()-1)+"\n");
     			sb = null;
 	
             }
@@ -385,7 +402,7 @@ public class ParkingAction implements ParkingLotMethods{
             }
 		}
 	}
-
+   //color slot numbers
 	@Override
 	public void colorslotsnumbers() {
 		// TODO Auto-generated method stub
@@ -413,15 +430,14 @@ public class ParkingAction implements ParkingLotMethods{
 							
 						}
 					}
-				System.out.println("\n");
-				System.out.println(sb.toString().substring(0, sb.toString().length()-1));
+				System.out.println(sb.toString().substring(0, sb.toString().length()-1)+"\n");
 				sb = null;
 				}
 			}
 		}
 		else
 		{
-			System.out.println("slot color getting");
+			
 			String color_slot_number = sc.nextLine();
 			if(color_slot_number!=null && !color_slot_number.isEmpty())
 			{
@@ -434,8 +450,8 @@ public class ParkingAction implements ParkingLotMethods{
 						sb.append(slot_numbers).append(",");
 					}
 				}
-			System.out.println("\n");
-			System.out.println(sb.toString().substring(0, sb.toString().length()-1));
+			
+			System.out.println(sb.toString().substring(0, sb.toString().length()-1)+"\n");
 			sb = null;
 		
 			}
@@ -446,11 +462,11 @@ public class ParkingAction implements ParkingLotMethods{
 		}
 			
 	}
-		
+	//car number present or not	
 	@Override
 	public void carnumberpresentslotornot() {
 		// TODO Auto-generated method stub
-
+      
 		
 		if(file_data.size()!=0)
 		{
@@ -463,20 +479,19 @@ public class ParkingAction implements ParkingLotMethods{
 					
 					for(int j=1;j<new_cardata.size();j++)
 					{
+						
 						if(new_cardata.get(j).contains(car_number[1]))
 						{
 							int slot_numbers=new_cardata.indexOf(new_cardata.get(j));
-							System.out.println("\n");
-							System.out.println(slot_numbers);
-							
+						    System.out.println("Car Found In These Slots "+slot_numbers);
+						    
 						}
 						
 						else
 						{
-							System.out.println("Not Found");
-							
-							break;
 						
+							System.out.println("These Slots Car Not Found");
+								
 						}
 					}
 				}
@@ -487,7 +502,6 @@ public class ParkingAction implements ParkingLotMethods{
 			
 			
 			String car_number =sc.nextLine();
-			
 			if(car_number!=null && !car_number.isEmpty())
 			{
 				for(int j=1;j<new_cardata.size();j++)
@@ -495,14 +509,12 @@ public class ParkingAction implements ParkingLotMethods{
 					if(new_cardata.get(j).contains(car_number))
 					{
 						int slot_numbers=new_cardata.indexOf(new_cardata.get(j));
-						System.out.println("\n");
-						System.out.println(slot_numbers);
+						System.out.println("Car Found In These Slots "+slot_numbers);
 						
 					}
 					else
 					{
-						System.out.println("Not Found");
-						break;
+							System.out.println("These Slot Car Not Found");
 					}
 				}
 			}
@@ -514,24 +526,22 @@ public class ParkingAction implements ParkingLotMethods{
 			
 		}
 	}
-
+   //taking new car
 	@Override
 	public void new_carchecking() {
 		// TODO Auto-generated method stub
-		System.out.println("ramgopal");
 		
 		String new_car_check = sc.nextLine();
-		
-		System.out.println(new_car_check+"ramgopal");
 		slotfullornot();
 		
 	}
-
+    //car 
 	@Override
 	public void carthereornot() {
 		// TODO Auto-generated method stub
-		System.out.println("carthereornot");
+		
 		String car_number =sc.nextLine();
+		
 		if(car_number!=null && !car_number.isEmpty())
 		{
 			for(int j=1;j<new_cardata.size();j++)
@@ -539,16 +549,12 @@ public class ParkingAction implements ParkingLotMethods{
 				if(new_cardata.get(j).contains(car_number))
 				{
 					int slot_numbers=new_cardata.indexOf(new_cardata.get(j));
-					System.out.println("\n");
-					System.out.println(slot_numbers);
+					System.out.println("Car Found In These Slots "+slot_numbers);
 				}
 				else
 				{
 					
-					System.out.println("Not Found");	
-					break;    
-					
-				}
+						System.out.println("These Slots Car Not Found");
 			}
 		}
 		
@@ -557,4 +563,5 @@ public class ParkingAction implements ParkingLotMethods{
 	
 
 	
+ }
 }
